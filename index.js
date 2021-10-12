@@ -5,13 +5,13 @@ import validator from "./user.validation.js";
 const app = express();
 app.use(express.json());
 
-let sightings = [];
+const sightings = [];
 app.use((req, res, next) => {
     console.log(req.method, req.path);
     next();
 })
     .post("/birds", validator, (req, res) => {
-        let isValid = validationResult(req);
+        const isValid = validationResult(req);
         !isValid.isEmpty()
             ? res.status(400).json({ error: isValid.errors.map((e) => e.msg) })
             : res.json("Validated!!");
